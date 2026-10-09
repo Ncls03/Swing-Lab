@@ -58,6 +58,11 @@ public class ClickCounterLab {
             count = 0; 
             countLabel.setText("Clicks: 0"); 
         });
+        nameField.addActionListener(e -> {
+            String name = nameField.getText().trim();
+            greetingLabel.setText(name.isEmpty() ? "Please type a name." : "Hello, " + name + "!");
+     });
+        
 
         frame.setLocationRelativeTo(null); 
         frame.setVisible(true); 
