@@ -1,9 +1,12 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*; 
 
 public class ClickCounterLab { 
     private static int count = 0;
 
+    @SuppressWarnings("java:S1172")
     public static void main(String[] args) { 
         SwingUtilities.invokeLater(ClickCounterLab::createAndShowGUI);
     } 
@@ -62,6 +65,7 @@ public class ClickCounterLab {
             String name = nameField.getText().trim();
             greetingLabel.setText(name.isEmpty() ? "Please type a name." : "Hello, " + name + "!");
      });
+        
         
 
         frame.setLocationRelativeTo(null); 
