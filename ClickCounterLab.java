@@ -2,7 +2,8 @@ import java.awt.*;
 import javax.swing.*; 
 
 public class ClickCounterLab { 
- 
+    private static int count = 0;
+
     public static void main(String[] args) { 
         SwingUtilities.invokeLater(ClickCounterLab::createAndShowGUI);
     } 
@@ -31,7 +32,7 @@ public class ClickCounterLab {
  
         JPanel hoverPanel = new JPanel(); 
         hoverPanel.setBackground(Color.LIGHT_GRAY); 
-        hoverPanel.add(new JLabel("Hover over this panel")); 
+        hoverPanel.add(new JLabel("Hover over this panels")); 
  
         JPanel top = new JPanel(new GridLayout(2, 1)); 
         top.add(countLabel); 
@@ -44,6 +45,20 @@ public class ClickCounterLab {
         frame.add(top, BorderLayout.NORTH); 
         frame.add(hoverPanel, BorderLayout.CENTER); 
         frame.add(bottom, BorderLayout.SOUTH);
+
+        clickButton.addActionListener(new ActionListener() { 
+            @Override 
+            public void actionPerformed(ActionEvent e) { 
+                count++; 
+                countLabel.setText("Clicks: " + count); 
+            } 
+        }); 
+ 
+        resetButton.addActionListener(e -> { 
+            count = 0; 
+            countLabel.setText("Clicks: 0"); 
+        });
+
         frame.setLocationRelativeTo(null); 
         frame.setVisible(true); 
     } 
