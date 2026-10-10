@@ -21,9 +21,11 @@ public class ClickCounterLab {
  
         JButton clickButton = new JButton("Click Me"); 
         JButton resetButton = new JButton("Reset"); 
+        JButton decrementButton = new JButton("-1");
  
         JPanel buttonPanel = new JPanel(new FlowLayout()); 
         buttonPanel.add(clickButton); 
+        buttonPanel.add(decrementButton);
         buttonPanel.add(resetButton); 
  
         JTextField nameField = new JTextField(15); 
@@ -34,7 +36,7 @@ public class ClickCounterLab {
  
         JPanel hoverPanel = new JPanel(); 
         hoverPanel.setBackground(Color.LIGHT_GRAY); 
-        hoverPanel.add(new JLabel("Hover over this panels")); 
+        hoverPanel.add(new JLabel("Hover over this panel")); 
  
         JPanel top = new JPanel(new GridLayout(2, 1)); 
         top.add(countLabel); 
@@ -53,13 +55,26 @@ public class ClickCounterLab {
             public void actionPerformed(ActionEvent e) {
                 count++;
                 countLabel.setText("Clicks: " + count);
+                if (count >=0 ) {
+                    countLabel.setForeground(Color.BLACK);
+                }
                 
+            }
+        });
+
+        decrementButton.addActionListener(e -> {
+                count--;
+                countLabel.setText("Clicks: " + count);
+
+            if (count < 0) {
+                countLabel.setForeground(Color.RED);
             }
         });
 
         resetButton.addActionListener(e -> {
             count = 0;
             countLabel.setText("Clicks: 0");
+            countLabel.setForeground(Color.BLACK);
         });
 
         nameField.addActionListener(e -> {
