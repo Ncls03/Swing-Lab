@@ -171,3 +171,13 @@ class ClickHandler implements ActionListener {
         }
     } 
 }
+
+//Checking for understanding
+
+//.   1. In the model, the event source create the action event and sends it to the event listener. 
+// The event object carries the action's details.
+// The event listener then processes the event and updates the model.
+
+//     2. The program calls SwingUtilities.invokeLater() to safely build and run the windows on Swing's thread that handles screen updates.
+//     3. Count is a static field because variab;es inside listeners cant be changed, so it must be outside the method to let it change freely with each click.
+//     Ikaw na answer 4-6
