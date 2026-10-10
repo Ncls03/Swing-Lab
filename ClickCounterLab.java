@@ -1,5 +1,6 @@
 import java.awt.*;
-import javax.swing.*; 
+import javax.swing.*;
+import java.awt.event.*;
 
 public class ClickCounterLab { 
     private static int count = 0;
@@ -47,22 +48,47 @@ public class ClickCounterLab {
         frame.add(hoverPanel, BorderLayout.CENTER); 
         frame.add(bottom, BorderLayout.SOUTH);
 
-        clickButton.addActionListener(e -> { 
-            count++; 
-            countLabel.setText("Clicks: " + count); 
-        }); 
- 
-        resetButton.addActionListener(e -> { 
-            count = 0; 
-            countLabel.setText("Clicks: 0"); 
+        clickButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                count++;
+                countLabel.setText("Clicks: " + count);
+                
+            }
         });
+
+        resetButton.addActionListener(e -> {
+            count = 0;
+            countLabel.setText("Clicks: 0");
+        });
+
         nameField.addActionListener(e -> {
             String name = nameField.getText().trim();
             greetingLabel.setText(name.isEmpty() ? "Please type a name." : "Hello, " + name + "!");
-     });
-        
-        
+        });
 
+        nameField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (e.getKeyChar() != '\n') {
+                    greetingLabel.setText("Typing...");
+                }
+            }
+        });
+        hoverPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                hoverPanel.setBackground(Color.CYAN);
+            }
+            @Override  
+            public void mouseExited(MouseEvent e) {
+                hoverPanel.setBackground(Color.LIGHT_GRAY);
+            }
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                greetingLabel.setText("Clicked at " + e.getX() + ", " + e.getY());
+            }
+        });
         frame.setLocationRelativeTo(null); 
         frame.setVisible(true); 
     } 
