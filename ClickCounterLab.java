@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class ClickCounterLab { 
-    private static int count = 0;
+     static int count = 0;
 
     @SuppressWarnings("java:S1172")
     public static void main(String[] args) { 
@@ -70,27 +70,8 @@ public class ClickCounterLab {
         frame.add(hoverPanel, BorderLayout.CENTER); 
         frame.add(bottom, BorderLayout.SOUTH);
 
-        clickButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    int count2 = Integer.parseInt(countSize.getText().trim());
-
-                    count += count2;
-                    countLabel.setText("Clicks: " + count);
-                    if (count >=0 ) {
-                        countLabel.setForeground(Color.BLACK);
-                    }
-
-                    if(count == 10) {
-                        greetingLabel.setText("Nice! 10 clicks!");
-                    }
-
-                } catch(NumberFormatException e2) { // change ang optionpane
-                    greetingLabel.setText("Please enter a valid whole number!");
-                }
-            }
-        });
+        clickButton.addActionListener(new ClickHandler(countLabel, greetingLabel, countSize));
+        
 
         decrementButton.addActionListener(e -> {
                 count--;
@@ -149,5 +130,44 @@ public class ClickCounterLab {
         
         frame.setLocationRelativeTo(null); 
         frame.setVisible(true); 
+    } 
+}
+
+class ClickHandler implements ActionListener {
+    private JLabel countLabel;
+    private JLabel greetingLabel;
+    private JTextField countSize;
+
+    public ClickHandler(JLabel countLabel, JLabel greetingLabel, JTextField countSize) {
+        this.countLabel = countLabel;
+        this.greetingLabel = greetingLabel;
+        this.countSize = countSize;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
+            int step = 1;
+            String text = countSize.getText().trim();
+            if (!text.isEmpty()) {
+                step = Integer.parseInt(text);
+            }
+
+        ClickCounterLab.count += step;
+        countLabel.setText("Clicks: " + ClickCounterLab.count);
+
+        if (ClickCounterLab.count >=0 ) {
+            countLabel.setForeground(Color.BLACK);
+        } else {
+            countLabel.setForeground(Color.RED);
+        }
+
+        if(ClickCounterLab.count == 10) {
+            greetingLabel.setText("Nice! 10 clicks!");
+        }
+
+        } catch (NumberFormatException e2) { // change ang optionpane
+            greetingLabel.setText("Please enter a valid whole number!");
+        }
     } 
 }
