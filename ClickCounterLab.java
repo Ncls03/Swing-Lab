@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*; 
 
 public class ClickCounterLab { 
@@ -49,12 +47,9 @@ public class ClickCounterLab {
         frame.add(hoverPanel, BorderLayout.CENTER); 
         frame.add(bottom, BorderLayout.SOUTH);
 
-        clickButton.addActionListener(new ActionListener() { 
-            @Override 
-            public void actionPerformed(ActionEvent e) { 
-                count++; 
-                countLabel.setText("Clicks: " + count); 
-            } 
+        clickButton.addActionListener(e -> { 
+            count++; 
+            countLabel.setText("Clicks: " + count); 
         }); 
  
         resetButton.addActionListener(e -> { 
