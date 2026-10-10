@@ -139,6 +139,14 @@ public class ClickCounterLab {
                 greetingLabel.setText("Clicked at " + e.getX() + ", " + e.getY());
             }
         });
+
+        hoverPanel.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                greetingLabel.setText("Mouse at " + e.getX() + ", " + e.getY());
+            }
+        });
+        
         frame.setLocationRelativeTo(null); 
         frame.setVisible(true); 
     } 
