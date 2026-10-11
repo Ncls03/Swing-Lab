@@ -147,11 +147,10 @@ class ClickHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            int step = 1;
+            
             String text = countSize.getText().trim();
-            if (!text.isEmpty()) {
-                step = Integer.parseInt(text);
-            }
+            int step = Integer.parseInt(text);
+
 
         ClickCounterLab.count += step;
         countLabel.setText("Clicks: " + ClickCounterLab.count);
@@ -166,8 +165,9 @@ class ClickHandler implements ActionListener {
             greetingLabel.setText("Nice! 10 clicks!");
         }
 
+
         } catch (NumberFormatException e2) { // change ang optionpane
-            greetingLabel.setText("Please enter a valid whole number!");
+            greetingLabel.setText("Please enter a valid whole number in the count size!");
         }
     } 
 }
