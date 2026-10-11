@@ -166,7 +166,7 @@ class ClickHandler implements ActionListener {
         }
 
 
-        } catch (NumberFormatException e2) { // change ang optionpane
+        } catch (NumberFormatException e2) { 
             greetingLabel.setText("Please enter a valid whole number in the count size!");
         }
     } 
@@ -175,9 +175,9 @@ class ClickHandler implements ActionListener {
 //Checking for understanding
 
 //.   1. In the model, the event source create the action event and sends it to the event listener. 
-// The event object carries the action's details.
-// The event listener then processes the event and updates the model.
-
+//      The event object carries the action's details. The event listener then processes the event and updates the model.
 //     2. The program calls SwingUtilities.invokeLater() to safely build and run the windows on Swing's thread that handles screen updates.
 //     3. Count is a static field because variab;es inside listeners cant be changed, so it must be outside the method to let it change freely with each click.
-//     Ikaw na answer 4-6
+//     4. The buttons appear in the order they are added to the panel, from left to right.
+//     5. Because in the reset button you only need to click the button which only need one method, while the mouse listener has many methods which would not work with lambda. 
+//     6. Because in the back end(the code), even though the variable changes, the label does not since setText is missing, which would not send the variable to the front end(the screen).
