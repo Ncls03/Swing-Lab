@@ -53,7 +53,11 @@ public class ClickCounterLab {
         namePanel.add(nameField); 
  
         JPanel hoverPanel = new JPanel();
-        hoverPanel.setBackground(Color.LIGHT_GRAY);
+        if(checkBox.isSelected()) {
+            hoverPanel.setBackground(Color.BLACK);
+        } else {
+            hoverPanel.setBackground(Color.LIGHT_GRAY);
+        }
         hoverPanel.add(new JLabel("Hover over this panel")); 
  
         JPanel top = new JPanel(new GridLayout(4, 1)); 
@@ -88,6 +92,14 @@ public class ClickCounterLab {
             countLabel.setForeground(Color.BLACK);
         });
 
+        checkBox.addActionListener(e -> {
+            if (checkBox.isSelected()) {
+                hoverPanel.setBackground(Color.BLACK);
+            } else {
+                hoverPanel.setBackground(Color.LIGHT_GRAY);
+            }
+        });
+
         nameField.addActionListener(e -> {
             String name = nameField.getText().trim(); 
             greetingLabel.setText(name.isEmpty() ? "Please type a name." : "Hello, " + name + "!");
@@ -102,18 +114,23 @@ public class ClickCounterLab {
                 }
             }
         });
+        
         hoverPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 if(checkBox.isSelected()) {
-                    hoverPanel.setBackground(Color.BLACK);
+                    hoverPanel.setBackground(Color.BLUE);
                 } else {
                     hoverPanel.setBackground(Color.CYAN);
                 }
             }
             @Override  
             public void mouseExited(MouseEvent e) {
-                hoverPanel.setBackground(Color.LIGHT_GRAY);
+                if(checkBox.isSelected()) {
+                    hoverPanel.setBackground(Color.BLACK);
+                } else {
+                    hoverPanel.setBackground(Color.LIGHT_GRAY);
+                }
             }
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -128,6 +145,7 @@ public class ClickCounterLab {
             }
         });
         
+
         frame.setLocationRelativeTo(null); 
         frame.setVisible(true); 
     } 
@@ -174,10 +192,10 @@ class ClickHandler implements ActionListener {
 
 //Checking for understanding
 
-//.   1. In the model, the event source create the action event and sends it to the event listener. 
-//      The event object carries the action's details. The event listener then processes the event and updates the model.
+//     1. In the model, the event source create the action event and sends it to the event listener. 
+//     The event object carries the action's details. The event listener then processes the event and updates the model.
 //     2. The program calls SwingUtilities.invokeLater() to safely build and run the windows on Swing's thread that handles screen updates.
-//     3. Count is a static field because variab;es inside listeners cant be changed, so it must be outside the method to let it change freely with each click.
+//     3. Count is a static field because variables inside listeners cant be changed, so it must be outside the method to let it change freely with each click.
 //     4. The buttons appear in the order they are added to the panel, from left to right.
 //     5. Because in the reset button you only need to click the button which only need one method, while the mouse listener has many methods which would not work with lambda. 
 //     6. Because in the back end(the code), even though the variable changes, the label does not since setText is missing, which would not send the variable to the front end(the screen).
